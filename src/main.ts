@@ -8,13 +8,13 @@ const bird = document.getElementById("bird")
 
 const scoreText = document.getElementById("scoreText")
 let score = 0
-SetText("click to start!")
+setText("click to start!")
 
 
 var isJumping = false
 let gameOver = true
 
-document.addEventListener('click', () => jump())
+document.addEventListener('mousedown', () => jump()) // Change 'click' to 'mousedown'
 
 
 setInterval(function () { Main()}, 10)
@@ -24,7 +24,7 @@ function Main()
     if(gameOver == false)
     {
         score = score + 1;
-        SetText("Score: " + score)
+        setText("Score: " + score)
 
         CheckGameOver()
     }
@@ -44,7 +44,7 @@ function jump()
     }
     else
     {
-        StartGame();
+        startGame();
     }
     
 }
@@ -83,7 +83,7 @@ function CheckGameOver()
         {
             //end game
             console.log("player died!")
-            SetText("Final Score: " + score + "! Click To Play Again!")
+            setText("Final Score: " + score + "! Click To Play Again!")
             gameOver = true
 
             //reset player
@@ -98,7 +98,7 @@ function CheckGameOver()
         {
             //end game
             console.log("player died!")
-            SetText("Final Score: " + score + "! Click To Play Again!")
+            setText("Final Score: " + score + "! Click To Play Again!")
             gameOver = true
 
             //reset player
@@ -111,7 +111,7 @@ function CheckGameOver()
 }
 
 
-function StartGame()
+function startGame()
 {
     console.log("Game started!")
     gameOver = false
@@ -120,7 +120,7 @@ function StartGame()
     bird?.classList.add("birdMove")
 }
 
-function SetText(s: string)
+function setText(s: string)
 {
     if(scoreText)
     {
