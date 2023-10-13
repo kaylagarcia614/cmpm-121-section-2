@@ -11,6 +11,11 @@ let score = 0
 setText("click to start!")
 
 
+let speed = 2.5; // Initial speed of obstacles
+let speedIncrement = 100; // Speed increment over time
+let speedInterval = 10000000; // Interval to increase spee
+
+
 var isJumping = false
 let gameOver = true
 let animationFrame: number | null = null;
@@ -27,6 +32,13 @@ function Main()
         score = score + 1;
         setText("Score: " + score)
 
+        if (score % speedInterval === 0) {
+            speed += speedIncrement;
+        }      
+        if (cactus && bird) {
+            cactus.style.animationDuration = speed + 's';
+            bird.style.animationDuration = (speed * 1.5) + 's';
+          }
         CheckGameOver()
     }
 }
