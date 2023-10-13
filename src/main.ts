@@ -13,6 +13,7 @@ setText("click to start!")
 
 var isJumping = false
 let gameOver = true
+let animationFrame: number | null = null;
 
 document.addEventListener('mousedown', () => jump()) // Change 'click' to 'mousedown'
 
@@ -118,6 +119,16 @@ function startGame()
     score = 0
     cactus?.classList.add("cactusMove")
     bird?.classList.add("birdMove")
+    requestAnimationFrame(gameLoop);
+}
+
+function gameLoop() {
+    if (!gameOver) {
+        score += 1;
+        setText("Score: " + score);
+        CheckGameOver();
+        animationFrame = requestAnimationFrame(gameLoop);
+    }
 }
 
 function setText(s: string)
@@ -127,3 +138,20 @@ function setText(s: string)
         scoreText.textContent = s
     }
 }
+
+// Initial call to start the game
+startGame();
+
+// Add an event listener to restart the game when the player clicks
+document.addEventListener('mousedown', () => {
+    if (gameOver) {
+        startGame();
+    }
+});
+
+// Add an event listener to pause the game when the player clicks
+document.addEventListener('mousedown', () => {
+    if (!gameOver) {
+        cancelAnimationFrame(animationFrame!);
+    }
+});
